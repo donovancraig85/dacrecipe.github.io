@@ -1,147 +1,108 @@
-html
-<html lang="en">
-
-  <style>
-    body {
-  font-family: Arial, sans-serif;
-  padding: 20px;
-  background: #fafafa;
+<style> 
+.recipe-card
+  {border-style: solid;
+border-color: #000000;
+background: #F7D599;
+   padding-left: 10px;
+   padding-bottom: 10px;
+   padding-right: 10px;
+   padding-top: 10px;
+   border-radius: 15px;
+   margin: 20px auto;
 }
-
-h1 {
-  text-align: center;
-  margin-bottom: 30px;
+  
+#image {
+  width: 33%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 15px;
 }
-
-.card {
-  background: white;
-  padding: 20px;
-  margin-bottom: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-
-input, textarea {
-  width: 100%;
-  padding: 10px;
-  margin: 8px 0;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-}
-
-button {
-  padding: 10px 15px;
-  background: #4CAF50;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-button:hover {
-  background: #45a049;
-}
-
-ul li {
-  margin: 10px 0;
-  padding: 10px;
-  background: #f3f3f3;
-  border-radius: 6px;
-}
-  </style>
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Recipe Book</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-
-<body>
-
-  <h1>My Recipe Book</h1>
-
-  <!-- Add Recipe Form -->
-  <section class="card">
-    <h2>Add a Recipe</h2>
-    <input id="recipeName" type="text" placeholder="Recipe name">
-    <textarea id="recipeIngredients" placeholder="Ingredients (one per line)"></textarea>
-    <textarea id="recipeSteps" placeholder="Steps"></textarea>
-    <button id="saveRecipe">Save Recipe</button>
-  </section>
-
-  <!-- Search -->
-  <section class="card">
-    <h2>Search Recipes</h2>
-    <input id="searchInput" type="text" placeholder="Search by name or ingredient">
-  </section>
-
-  <!-- Results -->
-  <section id="recipeList" class="card">
-    <h2>Saved Recipes</h2>
-    <ul id="recipes"></ul>
-  </section>
-
-  <script src="app.js">
-
-    // Load existing recipes or create empty array
-let recipes = JSON.parse(localStorage.getItem("recipes")) || [];
-
-// DOM elements
-const nameInput = document.getElementById("recipeName");
-const ingredientsInput = document.getElementById("recipeIngredients");
-const stepsInput = document.getElementById("recipeSteps");
-const saveBtn = document.getElementById("saveRecipe");
-const searchInput = document.getElementById("searchInput");
-const recipeList = document.getElementById("recipes");
-
-// Save recipe
-saveBtn.addEventListener("click", () => {
-  const recipe = {
-    name: nameInput.value.trim(),
-    ingredients: ingredientsInput.value.trim().split("\n"),
-    steps: stepsInput.value.trim()
-  };
-
-  if (!recipe.name) {
-    alert("Recipe must have a name");
-    return;
+  .recipe-grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap:20px;
+    max-width: 900px;
+    margin: 20px auto;
   }
+</style>
 
-  recipes.push(recipe);
-  localStorage.setItem("recipes", JSON.stringify(recipes));
+<div class="recipe-grid">
 
-  nameInput.value = "";
-  ingredientsInput.value = "";
-  stepsInput.value = "";
+<div class="recipe-card">
 
-  renderRecipes(recipes);
-});
 
-// Search recipes
-searchInput.addEventListener("input", () => {
-  const query = searchInput.value.toLowerCase();
-  const filtered = recipes.filter(r =>
-    r.name.toLowerCase().includes(query) ||
-    r.ingredients.some(i => i.toLowerCase().includes(query))
-  );
-  renderRecipes(filtered);
-});
+<h2>Classic Spaghetti Aglio e Olio</h2>
 
-// Render recipe list
-function renderRecipes(list) {
-  recipeList.innerHTML = "";
-  list.forEach(recipe => {
-    const li = document.createElement("li");
-    li.innerHTML = `
-      <strong>${recipe.name}</strong><br>
-      <em>${recipe.ingredients.length} ingredients</em>
-    `;
-    recipeList.appendChild(li);
-  });
-}
+<img id="image"  src="https://www.simplyrecipes.com/thmb/T4pIWYScdRD8jXoDHCd9v4otaEY=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/Simply-Recipes-Spaghetti-Aglio-e-Olio-LEAD-2-c8e7e8c6edb04a8691463c6ea8cd4ba1.jpg" alt="recipe image">
 
-// Initial load
-renderRecipes(recipes);
-  </script>
-</body>
-</html>
+  <h3> Ingredients</h3>
+  <ul>
+  <li>12 oz spaghetti</li>
+  <li>1/3 cup extra-virgin olive oil</li>
+    <li> 4 cloves garlic, thinly sliced</li>
+  <li>1/2 - 1 tsp red pepper flakes (to taste)</li>
+    <li> 1/4 cup fresh parsley, finely chopped</li>
+    <li> 1/4 cup grated Parmesan or Pecorino (optional)</li>
+    <li> 1/2 cup reserved pasta cooking water</li>
+  <li>salt, to taste</li>
+  <li>freshly ground black pepper, to taste</li>
+  </ul>
+
+  <h3>Directions</h3>
+
+  <ol>
+    <li>Bring a pot of salted water to boil.</li>
+    <li>Add the spaghetti and cook until al dente according to package instructions.</li>
+    <li>While the pasta cooks, heat the olive oil in a large skillet over medium-low heat.</li>
+    <li>Add the sliced garlic and cook gently, stirring often, until fragrant and lightly golden - do not let it burn.</li>
+    <li> Stir in red pepper flakes and cook for 30 seconds.</li>
+    <li>Reserve about 1/2 cup of the pasta cooking water, then drain the spaghetti.</li>
+    <li>Add the drained spaghetti to the skillet with the garlic oil and toss to coat</li>
+    <li>Add a splash of the reserved pasta water to loosen the sauce and help it cling to the pasta.</li>
+    <li>Stir in the chopped parsley, and season with salt and black pepper to taste.</li>
+    <li>Serve immediately, topped with grated Parmesan or Pecorino if desired.</li>
+  </ol>
+
+  <footer> Prep time: 10 minutes</footer>
+  
+</div>
+
+<div class = "recipe-card">
+
+  <h2>One Pan Skinny Chicken Alfredo</h2>
+
+ <img id="image" src="https://tastesbetterfromscratch.com/wp-content/uploads/2015/03/Skinny-Chicken-Alfredo-1-1013x1536.jpg" alt="alfredo recipe image">
+
+  <h3>Ingredients</h3>
+<ul>
+  <li>6 oz. uncooked farfalle pasta</li>
+  <li>2 tbsp olive oil</li>
+  <li>1/2 lb boneless skinless chicken breasts</li>
+  <li>2 cloves garlic</li>
+  <li>1 3/4 cups low-sodium chicken broth</li>
+  <li>1 3/4 cups fat-free milk</li>
+  <li>2 tbsp all-purpose flour</li>
+  <li>1/2 tsp onion powder</li>
+  <li>1/2 tsp dried basil</li>
+  <li>1/2 tsp dried parsley flakes</li>
+  <li>1 cup freshly grated parmesan cheese</li>
+  <li>salt and freshly ground black pepper</li>
+  </ul>
+
+  <h3> Directions</h3>
+  <ol>
+    <li>Cut chicken breasts into bite size pieces, about 1 inch, and season with salt and pepper. Add olive oil to a skillet over medium high heat.</li>
+    <li>Add chicken to the hot skillet and brown on all sides for 1-2 minutes (you don’t need to cook it all the way through).</li>
+    <li>Add minced garlic and sauté for one minute.</li>
+    <li>Add chicken broth, milk, flour, onion powder, basil, parsley and uncooked pasta to pan and stir well to combine.</li>
+    <li>Bring to a gentle boil, then cover and reduce heat to a simmer.</li>
+    <li>Simmer for 15-20 minutes or until pasta is tender, stirring once or twice during this time.</li>
+    <li>Remove from heat and stir in freshly grated parmesan cheese</li>
+    <li>Season with salt and pepper, if needed.</li>
+    <li>Serve with veggies, green salad, or breadsticks</li>
+  </ol>
+
+  <footer>prep time: 15 minutes</footer>
+</div>
+</div>
